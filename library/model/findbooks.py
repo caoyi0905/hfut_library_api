@@ -16,7 +16,7 @@ def main(strText,displaypg,page):
     res=r.content
     soup=BeautifulSoup(res,"lxml");
     tag=re.compile('</?\w+[^>]*>')
-    tot={'info':[]};
+    tot=[]
     lists=soup.findAll('li',{'class':'book_list_info'});
     for i in lists:
         tt=re.sub(tag,' ',str(i.findAll('h3')[0])).split(' ');
@@ -37,6 +37,6 @@ def main(strText,displaypg,page):
         author=ttt[3].strip();
         press=ttt[5].strip();
         x={"bookType":bookType,"bookName":bookName,"bookTP":bookTP,"bookmarc":marc,"totnum":totnum,"avalnum":avalnum,"author":author,"press":press};
-        tot['info'].append(x)
+        tot.append(x)
     data=json.dumps(tot,ensure_ascii=False)
     return data

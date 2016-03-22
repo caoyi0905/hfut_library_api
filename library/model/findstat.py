@@ -10,7 +10,7 @@ def main(marc_no):
 	r.encoding='gbk'
 	soup=BeautifulSoup(r.content,"lxml");
 	tableStr=soup.find('table',{'id':'item'})
-	res={'info':[]}
+	res=[]
 	soup=BeautifulSoup(str(tableStr),"lxml")
 	lists=soup.findAll('tr')[1:]
 	for l in lists:
@@ -21,5 +21,5 @@ def main(marc_no):
 		jsonRes['callno']=tds[0].text.encode('utf-8').strip()
 		jsonRes['school']=tds[3].text.encode('utf-8').strip()
 		jsonRes['stat']=tds[4].text.encode('utf-8').strip()
-		res['info'].append(jsonRes)
+		res.append(jsonRes)
 	return json.dumps(res,ensure_ascii=False)
